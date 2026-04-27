@@ -26,24 +26,24 @@ export default function AdminLogin() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
-      <div className="w-full max-w-md">
-        <div className="text-center mb-10">
-          <div className="w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden" style={{ backgroundColor: "#1a1a2e" }}>
+    <div className="min-h-screen flex flex-col items-center justify-center px-3 py-8" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
+      <div className="w-full max-w-sm sm:max-w-md">
+        <div className="text-center mb-8">
+          <div className="w-14 h-14 sm:w-20 sm:h-20 mx-auto mb-3 rounded-2xl overflow-hidden" style={{ backgroundColor: "#1a1a2e" }}>
             <Image src="/bbt.jpg" alt="BBT League" width={80} height={80} className="w-full h-full object-cover" />
           </div>
-          <h1 className="text-2xl font-bold" style={{ color: "#ffffff" }}>Admin Login</h1>
-          <p className="mt-1" style={{ color: "#64748b" }}>BBT League 2026</p>
+          <h1 className="text-xl sm:text-2xl font-bold" style={{ color: "#ffffff" }}>Admin Login</h1>
+          <p className="mt-1 text-sm" style={{ color: "#64748b" }}>BBT League 2026</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter admin password"
-              className="w-full px-5 py-4 rounded-xl transition-all"
+              placeholder="Password"
+              className="w-full px-4 py-3 sm:py-4 rounded-xl transition-all text-base"
               style={{ 
                 backgroundColor: "rgba(30, 41, 80, 0.6)", 
                 border: "1px solid #2a3a5a", 
@@ -61,16 +61,16 @@ export default function AdminLogin() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-4 font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 sm:py-4 font-semibold rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed text-base"
             style={{ backgroundColor: "#3b82f6", color: "#ffffff" }}
           >
-            {loading ? "Authenticating..." : "Login to Dashboard"}
+            {loading ? "Loading..." : "Login"}
           </button>
         </form>
 
-        <div className="text-center mt-8">
+        <div className="text-center mt-6 sm:mt-8">
           <Link href="/" className="text-sm transition-colors" style={{ color: "#64748b" }}>
-            ← Back to Website
+            ← Back
           </Link>
         </div>
       </div>

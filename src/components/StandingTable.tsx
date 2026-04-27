@@ -20,8 +20,8 @@ const teamColors: { [key: string]: string } = {
 
 export default function StandingTable({ standings }: StandingTableProps) {
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
+    <div className="overflow-x-auto -mx-4 px-4 sm:overflow-x-visible sm:px-0">
+      <table className="w-full text-sm min-w-[600px]">
         <thead>
           <tr style={{ borderBottom: "1px solid #2a3a5a" }}>
             <th className="p-3 text-center font-medium text-xs uppercase tracking-wider" style={{ color: "#64748b" }}>Pos</th>

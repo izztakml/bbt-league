@@ -30,22 +30,22 @@ export default function Home() {
   const standings = calculateStandings(allMatches, teams);
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
-      <header className="py-5 px-4" style={{ background: "linear-gradient(90deg, #1a1a2e 0%, #16213e 100%)", borderBottom: "1px solid #2a3a5a" }}>
+    <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
+      <header className="py-4 px-4 sm:py-5" style={{ background: "linear-gradient(90deg, #1a1a2e 0%, #16213e 100%)", borderBottom: "1px solid #2a3a5a" }}>
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <div className="w-12 h-12 rounded-xl overflow-hidden" style={{ backgroundColor: "#1a1a2e" }}>
+          <div className="flex items-center gap-3 sm:gap-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl overflow-hidden" style={{ backgroundColor: "#1a1a2e" }}>
               <Image src="/bbt.jpg" alt="BBT League" width={48} height={48} className="w-full h-full object-cover" />
             </div>
             <div>
-              <h1 className="text-xl font-bold" style={{ color: "#ffffff" }}>BBT League E-Football</h1>
+              <h1 className="text-lg sm:text-xl font-bold" style={{ color: "#ffffff" }}>BBT League E-Football</h1>
               <p className="text-xs" style={{ color: "#6b7a99" }}>Season 2026</p>
             </div>
           </div>
           <nav className="flex gap-1 items-center">
             <button
               onClick={() => setActiveTab("standings")}
-              className="px-4 py-2 rounded-lg font-semibold text-sm transition-all"
+              className="hidden sm:block px-4 py-2 rounded-lg font-semibold text-sm transition-all"
               style={{
                 backgroundColor: activeTab === "standings" ? "#3b82f6" : "transparent",
                 color: activeTab === "standings" ? "#ffffff" : "#94a3b8"
@@ -55,7 +55,7 @@ export default function Home() {
             </button>
             <button
               onClick={() => setActiveTab("fixtures")}
-              className="px-4 py-2 rounded-lg font-semibold text-sm transition-all"
+              className="hidden sm:block px-4 py-2 rounded-lg font-semibold text-sm transition-all"
               style={{
                 backgroundColor: activeTab === "fixtures" ? "#3b82f6" : "transparent",
                 color: activeTab === "fixtures" ? "#ffffff" : "#94a3b8"
@@ -65,16 +65,42 @@ export default function Home() {
             </button>
             <Link
               href="/admin"
-              className="px-4 py-2 rounded-lg font-semibold text-sm ml-2 transition-all"
+              className="px-3 py-2 sm:px-4 sm:py-2 rounded-lg font-semibold text-xs sm:text-sm transition-all"
               style={{ backgroundColor: "#1e3a5f", color: "#60a5fa" }}
             >
-              Admin
+              <span className="hidden sm:inline">Admin</span>
+              <span className="sm:hidden">⚙️</span>
             </Link>
           </nav>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-50 flex" style={{ backgroundColor: "#1a1a2e", borderTop: "1px solid #2a3a5a" }}>
+        <button
+          onClick={() => setActiveTab("standings")}
+          className="flex-1 py-4 font-semibold text-xs transition-all"
+          style={{
+            backgroundColor: activeTab === "standings" ? "#3b82f6" : "transparent",
+            color: activeTab === "standings" ? "#ffffff" : "#94a3b8",
+            borderTop: activeTab === "standings" ? "2px solid #60a5fa" : "2px solid transparent"
+          }}
+        >
+          Table
+        </button>
+        <button
+          onClick={() => setActiveTab("fixtures")}
+          className="flex-1 py-4 font-semibold text-xs transition-all"
+          style={{
+            backgroundColor: activeTab === "fixtures" ? "#3b82f6" : "transparent",
+            color: activeTab === "fixtures" ? "#ffffff" : "#94a3b8",
+            borderTop: activeTab === "fixtures" ? "2px solid #60a5fa" : "2px solid transparent"
+          }}
+        >
+          Fixtures
+        </button>
+      </div>
+
+      <main className="flex-1 max-w-5xl mx-auto px-3 sm:px-4 py-6 sm:py-8 pb-24 sm:pb-8 w-full">
         {activeTab === "standings" && (
           <div className="rounded-2xl p-6" style={{ backgroundColor: "rgba(30, 41, 80, 0.6)", backdropFilter: "blur(10px)", border: "1px solid #2a3a5a" }}>
             <div className="flex items-center gap-3 mb-6">

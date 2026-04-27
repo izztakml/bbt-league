@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "BBT League 2026 | Digital Football League",
   description: "BBT League 2026 - Digital Football League. Follow match results, standings, and fixtures.",
+  viewport: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no",
 };
 
 export default function RootLayout({

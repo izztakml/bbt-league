@@ -100,21 +100,21 @@ export default function AdminDashboard() {
   if (!isAuth) return null;
 
   return (
-    <div className="min-h-screen" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
-      <header className="py-4 px-4" style={{ background: "linear-gradient(90deg, #1a1a2e 0%, #16213e 100%)", borderBottom: "1px solid #2a3a5a" }}>
+    <div className="min-h-screen flex flex-col" style={{ background: "linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)" }}>
+      <header className="py-3 px-3 sm:py-4" style={{ background: "linear-gradient(90deg, #1a1a2e 0%, #16213e 100%)", borderBottom: "1px solid #2a3a5a" }}>
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl overflow-hidden" style={{ backgroundColor: "#1a1a2e" }}>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg overflow-hidden" style={{ backgroundColor: "#1a1a2e" }}>
               <Image src="/bbt.jpg" alt="BBT" width={40} height={40} className="w-full h-full object-cover" />
             </div>
             <div>
-              <h1 className="text-lg font-bold" style={{ color: "#ffffff" }}>Admin Dashboard</h1>
-              <p className="text-xs" style={{ color: "#64748b" }}>Match Result Manager</p>
+              <h1 className="text-base sm:text-lg font-bold" style={{ color: "#ffffff" }}>Admin</h1>
+              <p className="text-xs hidden sm:block" style={{ color: "#64748b" }}>Match Result Manager</p>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="px-4 py-2 rounded-lg text-sm transition-colors"
+            className="px-3 py-2 rounded-lg text-xs sm:text-sm transition-colors"
             style={{ backgroundColor: "#1e3a5f", color: "#94a3b8" }}
           >
             Logout
@@ -122,13 +122,13 @@ export default function AdminDashboard() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-6">
-        <div className="rounded-2xl p-6 mb-6" style={{ backgroundColor: "rgba(30, 41, 80, 0.6)", border: "1px solid #2a3a5a" }}>
-          <div className="mb-4">
-            <h2 className="text-lg font-bold" style={{ color: "#ffffff" }}>Select Matchweek</h2>
+      <main className="flex-1 max-w-5xl mx-auto px-3 sm:px-4 py-4 sm:py-6 w-full">
+        <div className="rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6" style={{ backgroundColor: "rgba(30, 41, 80, 0.6)", border: "1px solid #2a3a5a" }}>
+          <div className="mb-3 sm:mb-4">
+            <h2 className="text-base sm:text-lg font-bold" style={{ color: "#ffffff" }}>Select Matchweek</h2>
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          <div className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:pb-0">
             {Array.from({ length: 18 }, (_, i) => i + 1).map((week) => {
               const played = matches[week]?.filter(m => m.isPlayed).length || 0;
               const total = matches[week]?.length || 4;
@@ -138,13 +138,13 @@ export default function AdminDashboard() {
                 <button
                   key={week}
                   onClick={() => setSelectedWeek(week)}
-                  className="relative px-5 py-3 rounded-xl font-semibold text-sm transition-all"
+                  className="relative px-3 py-2 sm:px-5 sm:py-3 rounded-lg font-semibold text-xs sm:text-sm transition-all whitespace-nowrap"
                   style={{
                     backgroundColor: selectedWeek === week ? "#3b82f6" : "#1e3a5f",
                     color: selectedWeek === week ? "#ffffff" : "#94a3b8"
                   }}
                 >
-                  <span>Week {week}</span>
+                  <span>W{week}</span>
                   {isComplete && (
                     <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full" style={{ backgroundColor: "#22c55e", border: "2px solid #1e293b" }}></span>
                   )}
@@ -154,60 +154,60 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        <div className="rounded-2xl p-6 mb-6" style={{ backgroundColor: "rgba(30, 41, 80, 0.6)", border: "1px solid #2a3a5a" }}>
-          <div className="flex items-center justify-between mb-6">
+        <div className="rounded-2xl p-4 sm:p-6 mb-4 sm:mb-6" style={{ backgroundColor: "rgba(30, 41, 80, 0.6)", border: "1px solid #2a3a5a" }}>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4 sm:mb-6">
             <div>
-              <h2 className="text-lg font-bold" style={{ color: "#ffffff" }}>Matchweek {selectedWeek}</h2>
-              <p className="text-sm" style={{ color: "#64748b" }}>Enter match scores</p>
+              <h2 className="text-base sm:text-lg font-bold" style={{ color: "#ffffff" }}>Matchweek {selectedWeek}</h2>
+              <p className="text-xs sm:text-sm" style={{ color: "#64748b" }}>Enter match scores</p>
             </div>
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-6 py-3 font-semibold rounded-xl transition-all"
+              className="px-4 py-2 sm:px-6 sm:py-3 font-semibold rounded-lg text-sm transition-all"
               style={{ 
                 backgroundColor: saving ? "#1e3a5f" : saved ? "#22c55e" : "#3b82f6", 
                 color: "#ffffff"
               }}
             >
-              {saving ? "Saving..." : saved ? "Saved!" : "Save Changes"}
+              {saving ? "Saving..." : saved ? "Saved!" : "Save"}
             </button>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {matches[selectedWeek]?.map((match, index) => (
               <div
                 key={index}
-                className="p-5 rounded-xl flex items-center justify-between"
+                className="p-3 sm:p-5 rounded-xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
                 style={{ backgroundColor: "rgba(30, 58, 95, 0.5)", border: "1px solid #2a3a5a" }}
               >
-                <div className="flex-1 flex items-center justify-end gap-3">
-                  <span className="text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.homeTeam)}</span>
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: teamColors[match.homeTeam] || "#6b7280" }}></div>
+                <div className="flex items-center justify-between sm:justify-start sm:flex-1 sm:flex-none gap-2 sm:gap-3">
+                  <span className="text-sm sm:text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.homeTeam)}</span>
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full" style={{ backgroundColor: teamColors[match.homeTeam] || "#6b7280" }}></div>
                 </div>
 
-                <div className="mx-6 flex items-center gap-4">
+                <div className="flex items-center justify-center gap-2 sm:gap-4">
                   <input
                     type="number"
                     value={match.homeScore || ""}
                     onChange={(e) => updateMatch(selectedWeek, index, "homeScore", e.target.value)}
-                    className="w-20 py-3 px-4 rounded-xl text-center text-2xl font-bold"
+                    className="w-14 sm:w-20 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-center text-lg sm:text-2xl font-bold"
                     style={{ backgroundColor: "#1a1a2e", border: "1px solid #2a3a5a", color: "#ffffff" }}
                     placeholder="-"
                   />
-                  <span style={{ color: "#64748b", fontSize: "24px" }}>—</span>
+                  <span style={{ color: "#64748b", fontSize: "18px sm:24px" }}>—</span>
                   <input
                     type="number"
                     value={match.awayScore || ""}
                     onChange={(e) => updateMatch(selectedWeek, index, "awayScore", e.target.value)}
-                    className="w-20 py-3 px-4 rounded-xl text-center text-2xl font-bold"
+                    className="w-14 sm:w-20 py-2 sm:py-3 px-2 sm:px-4 rounded-lg text-center text-lg sm:text-2xl font-bold"
                     style={{ backgroundColor: "#1a1a2e", border: "1px solid #2a3a5a", color: "#ffffff" }}
                     placeholder="-"
                   />
                 </div>
 
-                <div className="flex-1 flex items-center justify-start gap-3">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: teamColors[match.awayTeam] || "#6b7280" }}></div>
-                  <span className="text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.awayTeam)}</span>
+                <div className="flex items-center justify-between sm:justify-start sm:flex-1 sm:flex-none gap-2 sm:gap-3">
+                  <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full" style={{ backgroundColor: teamColors[match.awayTeam] || "#6b7280" }}></div>
+                  <span className="text-sm sm:text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.awayTeam)}</span>
                 </div>
               </div>
             ))}

@@ -35,7 +35,7 @@ export default function Fixtures({ matchweeks, teams, selectedWeek, onWeekChange
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex gap-2 mb-4 sm:mb-6 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0">
         {weeks.map((week) => {
           const played = matchweeks[week]?.filter(m => m.isPlayed).length || 0;
           const total = matchweeks[week]?.length || 4;
@@ -45,7 +45,7 @@ export default function Fixtures({ matchweeks, teams, selectedWeek, onWeekChange
             <button
               key={week}
               onClick={() => onWeekChange(week)}
-              className="relative px-4 py-2.5 rounded-xl font-semibold text-sm transition-all"
+              className="relative px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm transition-all whitespace-nowrap"
               style={{
                 backgroundColor: selectedWeek === week ? "#3b82f6" : "#1e3a5f",
                 color: selectedWeek === week ? "#ffffff" : "#94a3b8"
@@ -60,17 +60,17 @@ export default function Fixtures({ matchweeks, teams, selectedWeek, onWeekChange
         })}
       </div>
 
-      <div className="mb-4 flex items-center gap-2 text-sm" style={{ color: "#64748b" }}>
-        <span>Matchweek {selectedWeek}</span>
+      <div className="mb-3 sm:mb-4 flex items-center gap-2 text-xs sm:text-sm" style={{ color: "#64748b" }}>
+        <span>Week {selectedWeek}</span>
         <span>•</span>
-        <span>{playedCount}/{totalMatches} matches played</span>
+        <span>{playedCount}/{totalMatches} played</span>
       </div>
 
-      <div className="space-y-3">
+      <div className="space-y-2 sm:space-y-3">
         {matchweeks[selectedWeek]?.map((match, index) => (
           <div
             key={index}
-            className="relative p-5 rounded-xl flex items-center justify-between"
+            className="p-3 sm:p-5 rounded-xl flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-3"
             style={{ 
               backgroundColor: match.isPlayed ? "rgba(30, 58, 95, 0.6)" : "rgba(30, 58, 95, 0.3)",
               border: "1px solid #2a3a5a"
@@ -82,13 +82,13 @@ export default function Fixtures({ matchweeks, teams, selectedWeek, onWeekChange
               </div>
             )}
             
-            <div className="flex-1 flex items-center justify-end gap-3">
-              <span className="text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.homeTeam)}</span>
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: teamColors[match.homeTeam] || "#6b7280" }}></div>
+            <div className="flex-1 flex items-center justify-end gap-2 sm:gap-3">
+              <span className="text-sm sm:text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.homeTeam)}</span>
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full" style={{ backgroundColor: teamColors[match.homeTeam] || "#6b7280" }}></div>
             </div>
 
-            <div className="mx-6 flex items-center gap-3">
-              <span className="text-3xl font-bold tracking-wider" style={{ 
+            <div className="mx-2 sm:mx-6 flex items-center gap-2 sm:gap-3">
+              <span className="text-xl sm:text-3xl font-bold tracking-wider" style={{ 
                 color: match.isPlayed
                   ? match.homeScore > match.awayScore
                     ? "#22c55e"
@@ -99,8 +99,8 @@ export default function Fixtures({ matchweeks, teams, selectedWeek, onWeekChange
               }}>
                 {match.isPlayed ? match.homeScore : "-"}
               </span>
-              <span style={{ color: "#64748b", fontSize: "20px" }}>—</span>
-              <span className="text-3xl font-bold tracking-wider" style={{ 
+              <span style={{ color: "#64748b", fontSize: "16px sm:20px" }}>—</span>
+              <span className="text-xl sm:text-3xl font-bold tracking-wider" style={{ 
                 color: match.isPlayed
                   ? match.awayScore > match.homeScore
                     ? "#22c55e"
@@ -113,9 +113,9 @@ export default function Fixtures({ matchweeks, teams, selectedWeek, onWeekChange
               </span>
             </div>
 
-            <div className="flex-1 flex items-center justify-start gap-3">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: teamColors[match.awayTeam] || "#6b7280" }}></div>
-              <span className="text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.awayTeam)}</span>
+            <div className="flex-1 flex items-center justify-start gap-2 sm:gap-3">
+              <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full" style={{ backgroundColor: teamColors[match.awayTeam] || "#6b7280" }}></div>
+              <span className="text-sm sm:text-lg font-bold" style={{ color: "#ffffff" }}>{getTeamName(match.awayTeam)}</span>
             </div>
           </div>
         ))}
